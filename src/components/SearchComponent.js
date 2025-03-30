@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -9,8 +9,36 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const SearchComponent = ({ placeholder, onSearch, sidebarOpen }) => {
+  const [query, setQuery] = useState("");
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.foursquare.com/v3/places/search",
+        {
+          params: {
+            near: query, // Use the user's input as the location (e.g., "Brooklyn")
+            query: "restaurant", // Ensures that the results relate to restaurants
+            categories: "13065", // Category ID for restaurants (adjust if needed)
+            sort: "POPULARITY", // Sort by popularity
+            limit: 20, // Limit number of results
+          },
+          headers: {
+            Accept: "application/json",
+            Authorization: process.env.REACT_APP_FSQ_API_KEY,
+          },
+        }
+      );
+      console.log("Foursquare API response:", response.data);
+      // Optionally, update a state variable to display the results in your UI.
+    } catch (error) {
+      console.error("Error fetching restaurants:", error);
+    }
+  };
+
   return (
     <motion.div
       animate={{
@@ -65,6 +93,8 @@ const SearchComponent = ({ placeholder, onSearch, sidebarOpen }) => {
         <TextField
           label={placeholder || "🏙️ Search Up!"}
           variant="outlined"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           sx={{
             width: "100%", // Fix width
             borderRadius: "30px",
@@ -81,16 +111,14 @@ const SearchComponent = ({ placeholder, onSearch, sidebarOpen }) => {
               color: "#ff9800",
             },
           }}
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={onSearch}>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            },
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={handleSearch}>
+                  <SearchIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
           }}
         />
       </Box>

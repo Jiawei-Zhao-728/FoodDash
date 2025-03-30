@@ -20,9 +20,7 @@ function Home() {
         }}
       >
         {/* Search Component (Title, Subtitle, and Search Bar) */}
-        <SearchComponent
-          placeholder="🏙️ Search City Name..."
-        />
+        <SearchComponent placeholder="🏙️ Search City Name..." />
       </Box>
     </Box>
   );
