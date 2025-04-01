@@ -17,22 +17,17 @@ const SearchComponent = ({ placeholder, onSearch, sidebarOpen }) => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        "https://api.foursquare.com/v3/places/search",
+        "http://127.0.0.1:5000/api/restaurants",
         {
           params: {
-            near: query, // Use the user's input as the location (e.g., "Brooklyn")
-            query: "restaurant", // Ensures that the results relate to restaurants
-            categories: "13065", // Category ID for restaurants (adjust if needed)
-            sort: "POPULARITY", // Sort by popularity
-            limit: 20, // Limit number of results
+            location: query, // Send the location as 'location'
           },
           headers: {
             Accept: "application/json",
-            Authorization: process.env.REACT_APP_FSQ_API_KEY,
           },
         }
       );
-      console.log("Foursquare API response:", response.data);
+      console.log("API response:", response.data);
       // Optionally, update a state variable to display the results in your UI.
     } catch (error) {
       console.error("Error fetching restaurants:", error);
