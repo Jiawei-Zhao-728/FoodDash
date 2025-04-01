@@ -40,8 +40,6 @@ Food Dash is built with:
 5. **Display:**  
    Results are rendered on the right side of the screen in a card-based, scrollable layout.
 
-_(Insert diagram or flowchart here if available)_
-
 ## 🚀 Current Progress
 
 - **Search Component:**
