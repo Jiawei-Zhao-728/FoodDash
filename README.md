@@ -1,87 +1,90 @@
-# 🍽️ Food Dash – Discover Local Eats 🌆
+# 🎬 Movie Magic – Your Ultimate Movie Discovery Platform
 
 ## 📊 Project Overview
 
-Food Dash is a **modern React web application** designed to help users easily discover, compare, and explore local restaurants and eateries. By leveraging the Foursquare Places API, Food Dash provides up-to-date, curated restaurant listings sorted by popularity and quality. Our goal is to transform the dining experience by making restaurant discovery interactive, intuitive, and efficient.
+Movie Magic is a **modern React web application** designed to help users discover, explore, and review movies and TV shows. By leveraging the TMDb (The Movie Database) API, Movie Magic provides up-to-date information about movies, including details, ratings, cast information, and trailers. Our goal is to enhance the movie discovery experience by making it interactive, intuitive, and engaging.
 
 ## 🔍 Key Features
 
-- **Smart Location Search:**  
-  Quickly find top restaurants in any specified city using dynamic location-based search.
-- **Detailed Venue Information:**  
-  View restaurant details including address, ratings, and user reviews.
-- **Interactive UI:**  
-  Enjoy a clean, responsive interface built with React and Material UI, featuring a two-column layout with a search panel and results display.
-- **Real-Time Data:**  
-  Retrieve live data directly from Foursquare through a secure Flask backend.
-- **Secure Backend Integration:**  
-  A Flask-based API service acts as a proxy between the frontend and Foursquare, protecting your API key and managing data requests.
+- **Smart Movie Search:**  
+  Search for movies by title, genre, or release date with dynamic filtering options.
+- **Detailed Movie Information:**  
+  View comprehensive movie details including synopsis, ratings, cast, crew, and trailers.
+- **User Reviews & Ratings:**  
+  Write and submit reviews for movies, and rate them using a 5-star system.
+- **User Accounts:**  
+  Create personal accounts to save favorite movies and manage review history.
+- **Trending Content:**  
+  Stay updated with sections for trending movies, popular shows, and upcoming releases.
+- **Favorites List:**  
+  Create and manage a personalized list of favorite movies for future reference.
 
 ## 🛠 Technical Architecture
 
-Food Dash is built with:
+Movie Magic is built with:
 
-- **Frontend:** React and Material UI for a modern, responsive interface.
-- **Backend:** Flask (with Flask-CORS) to securely fetch data from the Foursquare Places API.
-- **Data Source:** Foursquare Places API (using both Autocomplete and Search endpoints) for accurate restaurant data.
-- **HTTP Client:** Axios for seamless API calls.
-- **Styling:** CSS, Material UI, and Custom Hooks.
+- **Frontend:** React and Material UI for a modern, responsive interface
+- **Backend:** Flask (with Flask-CORS) to securely fetch data from the TMDb API
+- **Data Source:** TMDb API for comprehensive movie data and metadata
+- **Authentication:** Firebase for user authentication and profile management
+- **HTTP Client:** Axios for seamless API calls
+- **Styling:** CSS, Material UI, and Custom Hooks
 
 ### Data Flow Overview:
 
 1. **User Input:**  
-   A user enters a location into the search bar.
+   Users can search for movies or browse trending content.
 2. **API Request:**  
-   The React application sends the location to the Flask backend (using the `location` parameter).
+   The React application sends requests to the Flask backend.
 3. **Backend Processing:**  
-   The Flask backend calls the Foursquare API using the secure API key stored in environment variables, processes and filters the data.
+   The Flask backend communicates with TMDb API using secure API keys.
 4. **Data Delivery:**  
-   The processed data is returned to the React frontend.
+   Processed movie data is returned to the React frontend.
 5. **Display:**  
-   Results are rendered on the right side of the screen in a card-based, scrollable layout.
+   Results are rendered in a modern, card-based layout with detailed views.
 
 ## 🚀 Current Progress
 
 - **Search Component:**
-  - Implemented a dynamic search that leverages the Flask backend to securely fetch restaurant data from Foursquare.
-  - Integrated location suggestions and filters to ensure the app returns top restaurants in the specified area.
-- **Results Display:**
-  - Developed a two-column layout with the search UI on the left and restaurant results on the right.
-  - Results are displayed in clean, card-based components showing key details like restaurant name and address.
+  - Implemented dynamic movie search with filters for genre and release date
+  - Added auto-suggestions for movie titles
+- **Movie Details:**
+  - Created detailed movie views with cast information and trailers
+  - Integrated user reviews and ratings system
 - **Backend Integration:**
-  - Built a Flask backend that securely retrieves restaurant data using environment variables to store the Foursquare API key.
-  - Configured the backend to handle CORS requests, allowing the React frontend to communicate seamlessly.
-- **UI & Styling:**
-  - The interface is responsive, leveraging Material UI and Framer Motion for smooth animations and transitions.
+  - Built a Flask backend that securely retrieves movie data
+  - Implemented caching for frequently accessed data
+- **User Features:**
+  - Added user authentication with Firebase
+  - Implemented favorites list functionality
 
 ## ⚠️ Challenges & Solutions
 
-- **Accurate Location Filtering:**  
-  Initially, using the `query` parameter returned venues with the location name in their title rather than those located in the area. Switching to the `near` parameter (with additional keyword filtering) resolved this issue.
-- **API Key Security:**  
-  The API key is stored in environment variables and loaded securely on the backend using `python-dotenv`. This prevents accidental exposure in the client-side code.
-- **Dynamic Layout Management:**  
-  Ensured a responsive two-column layout that remains user-friendly on all devices.
+- **API Rate Limiting:**  
+  Implemented caching strategies to optimize API calls and stay within rate limits.
+- **Data Organization:**  
+  Created a structured approach to handle the rich movie metadata from TMDb.
+- **User Experience:**  
+  Designed an intuitive interface for seamless movie discovery and interaction.
 
-## 🔮 Future Enhancements & Roadmap
+## 🔮 Future Enhancements
 
 - **Advanced Filtering:**  
-  Further refine search filters by cuisine type, ratings, and additional parameters.
-- **Enhanced Backend Features:**
-  - Implement caching to reduce redundant API calls.
-  - Integrate a database for storing user data, favorites, and historical search analytics.
-- **Enhanced UI:**  
-  Add richer details to restaurant cards such as images, menus, and comprehensive reviews.
-- **User Accounts & Reviews:**  
-  Implement authentication to allow personalized user experiences, including favorites and detailed restaurant reviews.
+  Add more sophisticated search filters including cast, crew, and user ratings.
+- **Personalization:**  
+  Implement AI-powered movie recommendations based on user preferences.
+- **Social Features:**  
+  Add ability to share reviews and create watch parties.
+- **Watch Providers:**  
+  Integrate streaming service availability information.
 
 ## 📥 Installation & Setup
 
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/Jiawei-Zhao-728/FoodDash.git
-cd FoodDash
+git clone https://github.com/your-username/movie-magic.git
+cd movie-magic
 ```
 
 ### 2️⃣ Install Dependencies
@@ -92,40 +95,39 @@ For the **React frontend**:
 npm install
 ```
 
-For the **Flask backend** (ensure you have Python 3 installed):
+For the **Flask backend**:
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate   # On Windows, use: venv\Scripts\activate
-pip install Flask Flask-Cors requests python-dotenv
+source venv/bin/activate  # On Windows, use: venv\Scripts\activate
+pip install Flask Flask-CORS requests python-dotenv
 ```
 
 ### 3️⃣ Setup Environment Variables
 
-Create a `.env` file in the root directory with:
+Create a `.env` file in the root directory:
 
 ```
-REACT_APP_FSQ_API_KEY=YOUR_FSQ_API_KEY
-FSQ_API_KEY=YOUR_FSQ_API_KEY
+TMDB_API_KEY=your_tmdb_api_key
+REACT_APP_FIREBASE_CONFIG=your_firebase_config
 ```
-
-_Ensure that `.env` is added to your `.gitignore` to protect your API key._
 
 ### 4️⃣ Start the Development Servers
 
-- **Flask Backend:**
+**Flask Backend:**
 
-  ```bash
-  python3 app.py
-  ```
+```bash
+python3 app.py
+```
 
-  Your backend will run at `http://127.0.0.1:5000`.
+**React Frontend:**
 
-- **React Frontend:**  
-  In a separate terminal, run:
-  ```bash
-  npm start
-  ```
-  Your application will be running at [http://localhost:3000](http://localhost:3000).
+```bash
+npm start
+```
+
+Your application will be running at [http://localhost:3000](http://localhost:3000).
 
 ## 📸 Screenshots & Demo
+
+[Coming Soon]
